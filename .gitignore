@@ -1,0 +1,7 @@
+/_build
+/cover
+/deps
+/priv/*.jar
+/priv/*.class
+erl_crash.dump
+*.ez
