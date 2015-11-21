@@ -15,8 +15,6 @@ Download the following jars from http://mvnrepository.com/ and place them in the
   * poi-ooxml-schemas-3.13-20150929.jar
   * xmlbeans-2.6.0.jar
 
-Compile the java code with `javac -cp "priv/*" priv/XLSXReader.java`
-
 Run with `iex --sname xlsx@localhost --cookie foo -S mix`
 
 ```iex

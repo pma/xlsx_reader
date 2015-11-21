@@ -7,12 +7,10 @@ defmodule XLSXReader.Mixfile do
      elixir: "~> 1.1",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     compilers: [:javac] ++ Mix.compilers,
      deps: deps]
   end
 
-  # Configuration for the OTP application
-  #
-  # Type "mix help compile.app" for more information
   def application do
     [applications: [:logger],
      mod: {XLSXReader, []}]
@@ -20,5 +18,22 @@ defmodule XLSXReader.Mixfile do
 
   defp deps do
     []
+  end
+end
+
+defmodule Mix.Tasks.Compile.Javac do
+  use Mix.Task
+
+  @doc false
+  def run(_args) do
+    case :os.find_executable('javac') do
+      [] ->
+        throw(:javac_missing)
+      javac ->
+        {_, 0} = System.cmd(List.to_string(javac),
+                            ["-cp", "priv/*",
+                             "-d", "priv",
+                             "java_src/XLSXReader.java"])
+    end
   end
 end
